@@ -14,7 +14,6 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-import os
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,7 +41,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
-    'storages',
 
     'base.apps.BaseConfig',
 ]
@@ -114,9 +112,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'frontend/build')
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,12 +133,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'clothes_shop',
-        'USER': 'artur',
-        'PASSWORD': '3FC9E86CCE7$que',
-        'HOST': 'clothes-shop.csfr3wjmyizk.us-east-1.rds.amazonaws.com',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -187,18 +179,10 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    BASE_DIR / 'frontend/build/static'
+    BASE_DIR / 'static'
 ]
 
 MEDIA_ROOT = 'static/images'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-
-AWS_QUERYSTRING_AUTH = 'false'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = 'AKIA6P7Q65BH2QG6OM7N' 
-AWS_SECRET_ACCESS_KEY = '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'
-
-AWS_STORAGE_BUCKET_NAME = 'clothesshop-bucket-demo'
